@@ -1,27 +1,31 @@
 
-function loadProduct(){
-    const productList = document.getElementById("productList"); 
-    productList.innerHTML = "";
+function loadProduct(){ // função de carregamento para sempre que houver uma alteração dos dados
+    const productList = document.getElementById("productList"); //Selecionando o elemento de lista que sera maninpulado
+    productList.innerHTML = ""; // zera os valores listados
 
   
-    const products = JSON.parse(localStorage.getItem('products')) || [];
+    const products = JSON.parse(localStorage.getItem('products')) || []; //Transforma o arquivo em objeto para ser manipulado e pegar os itens do localStorage
 
-    products.forEach((product, index) => {
-        const li = document.createElement("li");
-        li.textContent = `${product.nome} - ${product.preco} - ${product.quant}`;
+    products.forEach((product, index) => { // ultiliza o laço for each para percorrer o objeto no localStorage e fazer a manipulação dos dados
+        const li = document.createElement("li"); // cria um elemento ou tag do tipo lista no arquivo
+        li.textContent = `${product.nome} | ${product.preco} | ${product.quant}`; // adiciona ou substitui os valores da lista pelo que esta armazenado no forEach junto a variavel objeto
 
-   
+        //ambos os botões são criados por indice
+
+        //criação do botao de remover produtos e atribuindo a função de click a ela
+
         const buttonRemove = document.createElement('button');
         buttonRemove.textContent = "Remover";
         buttonRemove.onclick = () => removeProduct(index);
         li.appendChild(buttonRemove);
 
-       
+       //criação do botão de editar podutos
         const buttonEdit = document.createElement('button');
         buttonEdit.textContent = "Editar";
         buttonEdit.onclick = () => editProduct(index);
         li.appendChild(buttonEdit);
 
+        //adicionando o li a lista de produtos 
         productList.appendChild(li);
     });
 }
@@ -38,36 +42,26 @@ function addProduct(){
     const quantInput = document.getElementById("quantInput");
     const quant = parseInt(quantInput.value.trim());
 
-    if(isNaN(preco)){
-
-        alert ("Preço invalido, Favor digitar um valor valido");
-    }
-    else if(isNaN(quant)){
-
-        alert ("Quantidade invalida, Favor digitar um valor valido");
-
-    }
-    else{
         
         if(nome && preco && quant){
     
         const products = JSON.parse(localStorage.getItem('products')) || []
         
-        const dados = {
+        const dados = { //variavel objeto para produtos armazenar os dados do nome preço e quant dentro de uma variavel
             nome: nome,
             preco: preco,
             quant: quant
         };
 
-        products.push(dados);
+        products.push(dados); //Esta puxando e atribuindo os dados na ultima posição do array de produtos
 
-        localStorage.setItem("products", JSON.stringify(products));
+        localStorage.setItem("products", JSON.stringify(products)); //convertedndo o valor e de objeto para string afim de ser acessado e vizualizado
         nomeInput.value = "";
         priceInput.value = "";
         quantInput.value = "";
-        loadProduct();
+        loadProduct(); // apos o processo finalizado o codigo realizada a recarga da pagina 
         }
-    }
+    
 }
 
 
