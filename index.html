@@ -8,8 +8,33 @@
 </head>
 <body>
     
+    <div class="container">
 
-    
+        <h1>Gestão de Estoque</h1>
+
+        <form>
+            <h2>Dados do Produto</h2>
+
+        
+            <input type="text" id="nomeInput" placeholder="Nome" required>
+            <input type="text" id="priceInput" placeholder="Preço" required>
+            <input type="text" id="quantInput" placeholder="Quantidade" required>
+
+            <button onclick="addProduct()">Adicionar</button>
+            <button onclick="removeAll()">Remover Tudo</button>
+
+        </form>
+
+        <ul id="productList"></ul>
+
+
+
+
+
+
+
+    </div>
+
 
 
 
